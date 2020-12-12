@@ -1,10 +1,16 @@
-#!/bin/bash 
-Attendance=$((RANDOM%2))
+#!/bin/bash
+
+randomCheck=$((RANDOM%2))
+isPresent=1
 
 
-if [[ $Attendance -eq 1 ]]
+if [ $isPresent -eq $randomCheck ]
 then
-	echo "Employee is Present"
+        ratePerHr=20
+        numOfWorkingHrs=8
+        salary=$(( $ratePerHr*$numOfWorkingHrs ))
 else
-	echo "Employee is Absent"
+        salary=0
 fi
+echo "Employee Wage:-" $salary
+
