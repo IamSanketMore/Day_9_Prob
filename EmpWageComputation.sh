@@ -11,6 +11,8 @@ MAX_WORKING_HRS=100;
 totalWorkingDays=1;
 totalWorkingHrs=0;
 
+declare -A dailyWageDic
+
 function getWorkingHrs()
 {
           case $empCheck in
@@ -33,9 +35,11 @@ do
         empCheck=$((RANDOM%3))
         empHrs="$( getWorkingHrs $empCheck )"
         dailyWage=$(( $empHrs*$RATE_PER_HR ))
-        dailyWageArray[$totalWorkingDays]=$dailyWage
+        dailyWageDic["Day"$totalWorkingDays]=$dailyWage
         totalWorkingHrs=$(($totalWorkingHrs + $empHrs))
 done
       totalSalary=$(($totalWorkingHrs*$RATE_PER_HR))
-echo "All elements" ${dailyWageArray[@]}
-echo "Index" ${!dailyWageArray[@]}
+echo "All elements" ${dailyWageDic[@]}
+echo "Keys" ${!dailyWageDic[@]}
+
+echo "Employee per month salary" $totalSalary
