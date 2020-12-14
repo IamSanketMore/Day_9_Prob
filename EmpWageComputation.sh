@@ -1,11 +1,11 @@
-#!/bin/bash -
+#!/bin/bash
 #CONSTANTS
 IS_FULL_TIME=1
 IS_PART_TIME=2
 SALARY=0
 RATE_PER_HR=20
 MAX_WORKING_DAYS=20;
-MAX_WORKING_HRS=60;
+MAX_WORKING_HRS=100;
 
 #VARIABLS
 totalWorkingDays=1;
@@ -32,7 +32,10 @@ do
         ((totalWorkingDays++))
         empCheck=$((RANDOM%3))
         empHrs="$( getWorkingHrs $empCheck )"
+        dailyWage=$(( $empHrs*$RATE_PER_HR ))
+        dailyWageArray[$totalWorkingDays]=$dailyWage
         totalWorkingHrs=$(($totalWorkingHrs + $empHrs))
 done
       totalSalary=$(($totalWorkingHrs*$RATE_PER_HR))
-echo "Employee Wage per month:-" $totalSalary
+echo "All elements" ${dailyWageArray[@]}
+echo "Index" ${!dailyWageArray[@]}
